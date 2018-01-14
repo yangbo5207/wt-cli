@@ -78,8 +78,9 @@ const compilerStep = port => {
 
 const options = {
   clientLogLevel: 'none',
-  contentBase: './build',
+  contentBase: 'public',
   hot: true,
+  publicPath: config.output.publicPath,
   host: 'localhost',
   watchOptions: {
     ignored: /node_modules/
@@ -91,6 +92,7 @@ const options = {
 check(spinner).then(port => {
   compilerStep(port);
 
+  webpackDevServer.addDevServerEntrypoints(config, options);
   const server = new webpackDevServer(compiler, options);
 
   server.listen(port, host, (err, result) => {
@@ -100,7 +102,7 @@ check(spinner).then(port => {
     clearConsole();
     spinner.text = chalk.cyan('正在启动测试服务器...');
     console.log('dev server listening on port ' + port);
-    // openBrowser(`http://${host}:${port}/`);
+    openBrowser(`http://${host}:${port}/`);
   });
 })
 

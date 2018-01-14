@@ -1,4 +1,4 @@
 import print from './print';
 
-console.log('hello');
-print('hello, world！');
+console.log('heseeeeee2');
+print('hello, worlddd！');

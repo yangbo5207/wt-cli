@@ -9,24 +9,17 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: "[name].[hash:8].js"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        include: ['./src', './static'],
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true
-        }
-      }
-    ]
+    filename: "static/js/[name].[hash:8].js",
+    publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin(),
     new CleanWebpackPlugin(['build']),
+
+    // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
     new webpack.NamedModulesPlugin(),
+
+    // webpack全局热更新
     new webpack.HotModuleReplacementPlugin()
   ]
 }
