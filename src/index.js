@@ -1,4 +1,4 @@
 import print from './print';
 
 console.log('hello');
-print('hello, world!3');
+print('hello, world！');

@@ -13,17 +13,6 @@ const config = require('./webpack.config.js');
 
 const host = 'localhost';
 
-const options = {
-  contentBase: './build',
-  hot: true,
-  host: 'localhost',
-  watchOptions: {
-    ignored: /node_modules/
-  },
-  clientLogLevel: 'none',
-  compress: true
-};
-
 const spinner = ora('webpack正在启动中...').start();
 
 let compiler = null;
@@ -87,8 +76,19 @@ const compilerStep = port => {
   })
 }
 
+const options = {
+  clientLogLevel: 'none',
+  contentBase: './build',
+  hot: true,
+  host: 'localhost',
+  watchOptions: {
+    ignored: /node_modules/
+  },
+  compress: true,
+  quiet: true
+};
+
 check(spinner).then(port => {
-  // webpackDevServer.addDevServerEntrypoints(config, options);
   compilerStep(port);
 
   const server = new webpackDevServer(compiler, options);
