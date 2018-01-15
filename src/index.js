@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import './style.css';
 
 const App = () => (
   <div>
@@ -8,4 +9,6 @@ const App = () => (
   </div>
 )
 
-render(<App />, document.body);
+var wrap = document.querySelector('#wrap');
+
+render(<App />, wrap);

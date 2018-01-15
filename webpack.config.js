@@ -41,12 +41,14 @@ module.exports = {
             }
           }
         ],
-        
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname, 'public/index.html')
+    }),
     new CleanWebpackPlugin(['build']),
 
     // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
