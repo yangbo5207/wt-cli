@@ -1,4 +1,5 @@
 import print from './print';
+import './style.css';
 
-console.log('heseeeeee2');
-print('hello, worlddd！');
+console.log('h23333ccc2s2');
+print('hello, wssdd！');

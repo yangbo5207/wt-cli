@@ -5,12 +5,25 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    index: path.resolve(__dirname, 'src/index.js')
+    // index: path.resolve(__dirname, 'src/index.js'),
+    app: [ './src/index.js' ]
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: "static/js/[name].[hash:8].js",
     publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+      },
+      {
+        test: /\.s(c|a)ss$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin(),

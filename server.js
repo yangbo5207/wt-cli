@@ -20,6 +20,12 @@ let compiler = null;
 const compilerStep = port => {
   var protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
   try {
+    // config.entry.app.push(
+    //   `webpack-dev-server/client?/`,
+    //   "webpack/hot/dev-server"
+    // )
+    // the other way , only support in webpack 3.x
+    config.entry.app.push(require.resolve('react-dev-utils/webpackHotDevClient'));
     compiler = webpack(config);
   } catch (err) {
     spinner.fail(chalk.red('编译失败'));
