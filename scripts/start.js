@@ -6,10 +6,11 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const chalk = require('chalk');
-const pkg = require('./package.json');
+const paths = require('./config/paths');
+const pkg = require(paths.pkg);
 
 const check = require('./check');
-const config = require('./webpack.config.js');
+const config = require('./config/webpack.config');
 
 const host = 'localhost';
 
@@ -84,7 +85,7 @@ const compilerStep = port => {
 
 const options = {
   clientLogLevel: 'none',
-  contentBase: 'public',
+  contentBase: paths.public,
   hot: true,
   publicPath: config.output.publicPath,
   host: 'localhost',

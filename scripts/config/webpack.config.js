@@ -4,14 +4,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const paths = require('./paths');
 
 module.exports = {
   entry: {
     // index: path.resolve(__dirname, 'src/index.js'),
-    app: [ './src/index.js' ]
+    app: [ path.resolve(paths.src, 'index.js') ]
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: paths.build,
     filename: "static/js/[name].[hash:8].js",
     publicPath: '/'
   },
@@ -31,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        include: [ path.resolve(__dirname, 'src') ],
+        include: [ paths.src ],
         use: [
           {
             loader: 'babel-loader',
@@ -48,7 +49,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(__dirname, 'public/index.html')
+      template: path.resolve(paths.public, 'index.html')
     }),
     new CleanWebpackPlugin(['build']),
 
