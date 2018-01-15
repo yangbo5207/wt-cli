@@ -1,3 +1,5 @@
+// process.env.NODE_ENV = 'development';
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -26,6 +28,20 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         use: [ 'file-loader' ]
+      },
+      {
+        test: /\.jsx?$/,
+        include: [ path.resolve(__dirname, 'src') ],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              presets: [ '@babel/env', '@babel/react' ]
+            }
+          }
+        ],
+        
       }
     ]
   },

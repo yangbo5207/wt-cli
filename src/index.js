@@ -1,12 +1,11 @@
-import print from './print';
-import './style.css';
-import zs from './zs.png';
+import React from 'react';
+import { render } from 'react-dom';
 
-console.log('h23333ccc2s2');
-print('hello, wssdd！');
+const App = () => (
+  <div>
+    <h1>Hello, world</h1>
+    <p>this is a react app.</p>
+  </div>
+)
 
-var img = document.createElement('img');
-img.width = 200;
-img.src = zs;
-
-document.body.appendChild(img);
+render(<App />, document.body);
