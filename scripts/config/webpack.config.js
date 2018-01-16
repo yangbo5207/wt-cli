@@ -4,15 +4,17 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const paths = require('./paths');
 
+const publicPath = '/';
+
 module.exports = {
   entry: {
-    // index: path.resolve(__dirname, 'src/index.js'),
     app: [ path.resolve(paths.src, 'index.js') ]
   },
   output: {
     path: paths.build,
     filename: "static/js/[name].[hash:8].js",
-    publicPath: '/'
+    publicPath: publicPath,
+    pathinfo: true
   },
   module: {
     rules: [
@@ -43,13 +45,13 @@ module.exports = {
       }
     ]
   },
-  devtool: 'cheap-module-source-map',
+  // devtool: 'cheap-module-source-map',
   plugins: [
+    new CleanWebpackPlugin(paths.build, { allowExternal: true  }),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(paths.public, 'index.html')
     }),
-    new CleanWebpackPlugin(['build']),
 
     // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
     new webpack.NamedModulesPlugin(),

@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'development';
+
 const webpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const ora = require('ora');
