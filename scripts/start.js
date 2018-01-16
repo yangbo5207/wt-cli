@@ -28,7 +28,7 @@ const compilerStep = port => {
     //   "webpack/hot/dev-server"
     // )
     // the other way , only support in webpack 3.x
-    config.entry.app.push(require.resolve('react-dev-utils/webpackHotDevClient'));
+    // config.entry.app.push(require.resolve('react-dev-utils/webpackHotDevClient'));
     compiler = webpack(config);
   } catch (err) {
     spinner.fail(chalk.red('编译失败'));

@@ -3,13 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const paths = require('./paths');
+const _ = require('lodash');
 
 const publicPath = '/';
 
+var entries = {};
+_.each(paths.entries, (file, name) => {
+  entries[name] = [file].concat('react-dev-utils/webpackHotDevClient')
+})
+
 module.exports = {
-  entry: {
-    app: [ path.resolve(paths.src, 'index.js') ]
-  },
+  entry: entries,
   output: {
     path: paths.build,
     filename: "static/js/[name].[hash:8].js",
