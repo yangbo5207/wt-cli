@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const paths = require('./paths');
 const _ = require('lodash');
+const pkg = require(paths.pkg);
 
 const publicPath = '/';
 
@@ -31,7 +32,12 @@ paths.pageEntries.forEach(name => {
 })
 
 module.exports = {
-  entry: entries,
+  entry: Object.assign({}, entries, {
+    vendor: [ 
+      'react-dev-utils/webpackHotDevClient',  
+      path.resolve(paths.src, 'print.js')
+    ].concat(pkg.vendor || [])
+  }),
   output: {
     path: paths.build,
     filename: "static/js/[name].[hash:8].js",
@@ -75,6 +81,11 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
 
     // webpack全局热更新
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    })
   ])
 }
