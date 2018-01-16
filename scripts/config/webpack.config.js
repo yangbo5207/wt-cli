@@ -12,6 +12,24 @@ _.each(paths.entries, (file, name) => {
   entries[name] = [file].concat('react-dev-utils/webpackHotDevClient')
 })
 
+var injects = [];
+paths.pageEntries.forEach(name => {
+  var chunks = ['vendor'];
+  var file = path.resolve(paths.public, name + '.html');
+  if (paths.entries[name]) {
+    chunks.push(name);
+  }
+
+  injects.push(
+    new HtmlWebpackPlugin({
+      filename: name + '.html',
+      template: file,
+      inject: true,
+      chunks
+    })
+  )
+})
+
 module.exports = {
   entry: entries,
   output: {
@@ -50,17 +68,13 @@ module.exports = {
     ]
   },
   // devtool: 'cheap-module-source-map',
-  plugins: [
+  plugins: injects.concat([
     new CleanWebpackPlugin(paths.build, { allowExternal: true  }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.resolve(paths.public, 'index.html')
-    }),
 
     // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
     new webpack.NamedModulesPlugin(),
 
     // webpack全局热更新
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ])
 }
