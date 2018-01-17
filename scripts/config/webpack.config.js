@@ -56,20 +56,16 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
-        use: [ 'file-loader' ]
+        loader: 'file-loader'
       },
       {
         test: /\.jsx?$/,
         include: [ paths.src ],
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              presets: [ '@babel/env', '@babel/react' ]
-            }
-          }
-        ],
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          presets: ['@babel/env', '@babel/react']
+        }
       }
     ]
   },
