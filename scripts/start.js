@@ -87,7 +87,8 @@ const compilerStep = port => {
 
 const options = {
   clientLogLevel: 'none',
-  contentBase: paths.public,
+  // contentBase: paths.public,
+  contentBase: false,
   hot: true,
   publicPath: config.output.publicPath,
   host: 'localhost',
