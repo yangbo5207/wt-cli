@@ -80,6 +80,8 @@ module.exports = {
     // webpack全局热更新
     new webpack.HotModuleReplacementPlugin(),
 
+    new WatchMissingNodeModulesPlugin(paths.nodeModules),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
